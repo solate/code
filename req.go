@@ -7,7 +7,7 @@ import (
 )
 
 //生成Req代码
-func GenerationReq(file, sub string, format string) (list []string) {
+func  GenerationReq(file, sub string, format string) (list []string) {
 	return GenerationReqByBody(utils.GetStructBody(file, sub), format)
 }
 
