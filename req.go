@@ -6,8 +6,19 @@ import (
 	"strings"
 )
 
+func GenerationReqByFile(fileName, reqName, formart string) (str string, err error) {
+	//读取文件
+	fileStr, err := utils.ReadFile(fileName)
+	if err != nil {
+		return
+	}
+
+	list := GenerationReq(fileStr, reqName, formart)
+	return strings.Join(list, "\n"), nil
+}
+
 //生成Req代码
-func  GenerationReq(file, sub string, format string) (list []string) {
+func GenerationReq(file, sub string, format string) (list []string) {
 	return GenerationReqByBody(utils.GetStructBody(file, sub), format)
 }
 
