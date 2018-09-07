@@ -2,7 +2,6 @@ package generation
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strings"
 	"testing"
 )
@@ -39,14 +38,9 @@ func TestGenerateInterfaceCode(t *testing.T) {
 }
 
 func genReq(sub string) string {
-	//读取文件
-	fileBytes, err := ioutil.ReadFile("./testdata/a.go")
+	str, err := GenerationReqByFile("./testdata/a.go", sub, "data.Add(\"%s\", %s)")
 	if err != nil {
-		fmt.Println("err read file:", err)
+		fmt.Println(err)
 	}
-	//文件字符
-	fileStr := string(fileBytes)
-
-	list := GenerationReq(fileStr, sub, "data.Add(\"%s\", %s)")
-	return strings.Join(list, "\n")
+	return str
 }
