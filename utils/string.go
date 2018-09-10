@@ -50,11 +50,17 @@ func GetTargetAfterPart(source, target, startTag, endTag string) (str string) {
 	//从子串将后面的切下来,然后根据子串定位
 	subStr := source[index:]
 
+	str = SubString(subStr, startTag, endTag)
+	return
+}
+
+//获得切割后的字符串
+func SubString(source, startTag, endTag string) (str string) {
 	//定位请求参数内容位置, 前后{} 里的内容
-	begin := strings.Index(subStr, startTag)
-	end := strings.Index(subStr, endTag)
+	begin := strings.Index(source, startTag)
+	end := strings.Index(source, endTag)
 
 	//获得结构{}内包含的字符型
-	str = subStr[begin+1 : end] //+1是为了不包含startTag
+	str = source[begin+1 : end] //+1是为了不包含startTag
 	return
 }

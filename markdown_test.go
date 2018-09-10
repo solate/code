@@ -1,9 +1,21 @@
 package generation
 
 import (
+	"github.com/solate/generation/utils"
 	"strings"
 	"testing"
 )
+
+func TestParseMarkdown(t *testing.T) {
+
+	str, err := utils.ReadFile("./testdata/api.md")
+	if err != nil {
+		t.Error(err)
+	}
+
+	ParseMarkdown(str)
+
+}
 
 func TestGenerateMarkdownTable(t *testing.T) {
 
@@ -16,6 +28,6 @@ func TestGenerateMarkdownTable(t *testing.T) {
 | fee   | string | 金额 | 是 |  精确到分     |
 | item_name   | string | 项目名称 | 是 |       |`
 
-	list := GenerateMarkdownTable(str, 1, 2, 3)
+	list := MarkdownTable(str, 1, 2, 3)
 	t.Log(strings.Join(list, "\n"))
 }

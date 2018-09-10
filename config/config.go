@@ -9,9 +9,13 @@ var Config *Setting = &Setting{
 	ServiceUri:        "/outpatient/reports",
 	ServiceNote:       "测试注释",
 
-	ModelTemplate: "./template/model.tpl",
-	ModelExport:   "./export/model/",
-	ModelExample:  "./source/model.go",
+	ModuleTemplate:   "./template/model.tpl",
+	ModuleExport:     "./export/model/",
+	ModuleExample:    "./source/model.go",
+	ModuleName:       "Pro",
+	ModuleMethodType: "GET",
+	ModuleUri:        "/outpatient/reports",
+	ModuleNote:       "测试注释",
 }
 
 //配置文件
@@ -24,9 +28,13 @@ type Setting struct {
 	ServiceUri        string //Service 请求路径  /outpatient/reports
 	ServiceNote       string //Service uri 注释
 
-	ModelTemplate string //Model 使用模板文件路径
-	ModelExport   string //Model 输出文件路径
-	ModelExample  string //Model 使用样例路径
+	ModuleTemplate   string //Module 使用模板文件路径
+	ModuleExport     string //Module 输出文件路径
+	ModuleExample    string //Module 使用样例路径
+	ModuleName       string //Module Struct 名字
+	ModuleMethodType string //Module 方法类型: get/post/put/delete
+	ModuleUri        string //Module 请求路径  /outpatient/reports
+	ModuleNote       string //Module uri 注释
 
 }
 

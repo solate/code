@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-//生成service层代码
-func GenerateService(exampleStr string, params ...interface{}) (err error) {
+//生成module层代码
+func GenerateModule(exampleStr string, params ...interface{}) (err error) {
 
 	//获取包名
 	packageName := utils.GetPackageName(exampleStr)
@@ -17,10 +17,10 @@ func GenerateService(exampleStr string, params ...interface{}) (err error) {
 	importBody := utils.GetImportBody(exampleStr)
 	//fmt.Println(importBody)
 
-	structName := config.Config.ServiceName
-	url := config.Config.ServiceUri
-	method := config.Config.ServiceMethodType
-	note := config.Config.ServiceNote
+	structName := config.Config.ModuleName
+	url := config.Config.ModuleUri
+	method := config.Config.ModuleMethodType
+	note := config.Config.ModuleNote
 	methodName := utils.GetUriMethodName(url, method)
 
 	// 获取 struct 属性列表
@@ -32,7 +32,7 @@ func GenerateService(exampleStr string, params ...interface{}) (err error) {
 	//str := utils.GetStructBody(file, "ScheduleListReq")
 	//fmt.Println(str)
 
-	templateStr, err := GenerateTemplate(config.Config.ServiceTemplate,
+	templateStr, err := GenerateTemplate(config.Config.ModuleTemplate,
 		packageName,
 		importBody,
 		//struct
@@ -58,7 +58,7 @@ func GenerateService(exampleStr string, params ...interface{}) (err error) {
 		methodName,
 	)
 
-	err = utils.WriteFile(utils.GenerateUnderlineFileName(config.Config.ServiceExport, structName), templateStr)
+	err = utils.WriteFile(utils.GenerateUnderlineFileName(config.Config.ModuleExport, structName), templateStr)
 
 	return
 }
