@@ -27,10 +27,10 @@ func ParseMarkdown(str string) (list []model.MarkDown) {
 				md.Method = GetAttrBody(attr, "Method")
 			}
 			if strings.Contains(attr, "Request") {
-				md.Request = GetAttrTable(attr) //获得Req
+				md.Request = GetAttrReqTable(attr) //获得Req
 			}
 			if strings.Contains(attr, "Response") {
-				md.Response = GetAttrTable(attr) //获得Reply
+				md.Response = GetAttrReplyTable(attr) //获得Reply
 			}
 		}
 
@@ -60,7 +60,7 @@ func GetAttrBody(source, tag string) (str string) {
 	return
 }
 
-func GetAttrTable(source string) (list []model.MarkDownTable) {
+func GetAttrReqTable(source string) (list []model.MarkDownReqTable) {
 	begin := strings.Index(source, "|")
 	end := strings.LastIndex(source, "|")
 
@@ -69,7 +69,7 @@ func GetAttrTable(source string) (list []model.MarkDownTable) {
 
 	strSlice := strings.Split(source, "\n") //按行读取
 	strSlice = strSlice[2:]                 //跳过表格表头, 也就是第一行第二行
-	list = make([]model.MarkDownTable, 0, len(strSlice))
+	list = make([]model.MarkDownReqTable, 0, len(strSlice))
 	for _, v := range strSlice {
 		//if k == 0 || k == 1 { //跳过表格表头, 也就是第一行第二行
 		//	continue
@@ -79,11 +79,48 @@ func GetAttrTable(source string) (list []model.MarkDownTable) {
 			return
 		}
 
-		list = append(list, model.MarkDownTable{
+		list = append(list, model.MarkDownReqTable{
 			Name:       strings.Title(utils.UnderlineToCamel(strings.TrimSpace(value[1]))),
 			Type:       strings.TrimSpace(value[2]),
 			Note:       strings.TrimSpace(value[3]),
 			IsRequired: strings.TrimSpace(value[4]),
+		})
+
+	}
+
+	return
+}
+
+func GetAttrReplyTable(source string) (list []model.MarkDownReplyTable) {
+
+	var isList bool
+	if strings.Contains(source, "*list*") {
+		isList = true
+	}
+
+	begin := strings.Index(source, "|")
+	end := strings.LastIndex(source, "|")
+
+	//获取表格
+	source = source[begin : end+1] //包含最后一个 |
+
+	strSlice := strings.Split(source, "\n") //按行读取
+	strSlice = strSlice[2:]                 //跳过表格表头, 也就是第一行第二行
+	list = make([]model.MarkDownReplyTable, 0, len(strSlice))
+	for _, v := range strSlice {
+		//if k == 0 || k == 1 { //跳过表格表头, 也就是第一行第二行
+		//	continue
+		//}
+		value := strings.Split(v, "|")
+		if len(value) != 7 { //如果表格不对，直接return
+			return
+		}
+
+		list = append(list, model.MarkDownReplyTable{
+			Name:   strings.Title(utils.UnderlineToCamel(strings.TrimSpace(value[1]))),
+			Type:   strings.TrimSpace(value[2]),
+			Note:   strings.TrimSpace(value[3]),
+			IsList: isList,
 		})
 
 	}

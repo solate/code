@@ -2,12 +2,13 @@ package generation
 
 import (
 	"github.com/solate/generation/config"
+	"github.com/solate/generation/model"
 	"github.com/solate/generation/utils"
 	"strings"
 )
 
 //生成service层代码
-func GenerateService(exampleStr string, params ...interface{}) (err error) {
+func GenerateServiceList(exampleStr string, params ...interface{}) (err error) {
 
 	//获取包名
 	packageName := utils.GetPackageName(exampleStr)
@@ -61,4 +62,25 @@ func GenerateService(exampleStr string, params ...interface{}) (err error) {
 	err = utils.WriteFile(utils.GenerateUnderlineFileName(config.Config.ServiceExport, structName), templateStr)
 
 	return
+}
+
+func GenerateService(exampleStr string, data model.MarkDown) (err error) {
+
+	//获取包名
+	packageName := utils.GetPackageName(exampleStr)
+	//fmt.Println(packageName)
+
+	//获取import body 内容
+	importBody := utils.GetImportBody(exampleStr)
+	//fmt.Println(importBody)
+
+	structName := config.Config.ServiceName
+	url := config.Config.ServiceUri
+	method := config.Config.ServiceMethodType
+	note := config.Config.ServiceNote
+	methodName := utils.GetUriMethodName(url, method)
+	export := config.Config.ServiceExport
+
+	return
+
 }

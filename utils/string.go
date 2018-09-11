@@ -1,6 +1,9 @@
 package utils
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
 
 //下划线变为驼峰
 func UnderlineToCamel(str string) string {
@@ -30,6 +33,22 @@ func CamelToUnderline(str string) string {
 		}
 	}
 	return string(strB)
+}
+
+//首字母大写
+func Ucfirst(str string) string {
+	for i, v := range str {
+		return string(unicode.ToUpper(v)) + str[i+1:]
+	}
+	return ""
+}
+
+//首字母小写
+func Lcfirst(str string) string {
+	for i, v := range str {
+		return string(unicode.ToLower(v)) + str[i+1:]
+	}
+	return ""
 }
 
 //在全文中找到目标字符串，并返回目标后开始标记和结束标记之间的字符串
@@ -65,6 +84,7 @@ func SubString(source, startTag, endTag string) (str string) {
 	return
 }
 
+//根据tag分割字符串，
 func SplitByTag(source, tag string) (list []string) {
 	source = strings.TrimSpace(source)        //清除空格
 	listLen := strings.Count(source, tag) + 1 //2个文档就分成3份
