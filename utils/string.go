@@ -64,3 +64,11 @@ func SubString(source, startTag, endTag string) (str string) {
 	str = source[begin+1 : end] //+1是为了不包含startTag
 	return
 }
+
+func SplitByTag(source, tag string) (list []string) {
+	source = strings.TrimSpace(source)        //清除空格
+	listLen := strings.Count(source, tag) + 1 //2个文档就分成3份
+	parts := strings.SplitN(source, tag, listLen)
+	list = parts[1:] //将第一个没用部分抛弃
+	return
+}

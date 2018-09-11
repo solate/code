@@ -13,7 +13,8 @@ func TestParseMarkdown(t *testing.T) {
 		t.Error(err)
 	}
 
-	ParseMarkdown(str)
+	list := ParseMarkdown(str)
+	t.Log(list)
 
 }
 
