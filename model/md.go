@@ -6,6 +6,7 @@ type MarkDown struct {
 	Method   string               //方法类型 GET/POST
 	Request  []MarkDownReqTable   //请求参数
 	Response []MarkDownReplyTable //返回值参数
+	IsList   bool                 //返回值Response是否是List: 是/否, true/false 字符串
 }
 
 //表格字段
@@ -17,8 +18,8 @@ type MarkDownReqTable struct {
 }
 
 type MarkDownReplyTable struct {
-	Name   string //字段名称
-	Type   string //字段类型
-	Note   string //字段注释
-	IsList bool   //返回值是否是List: 是/否, true/false 字符串
+	Name string //字段名称
+	Type string //字段类型
+	Note string //字段注释
+
 }

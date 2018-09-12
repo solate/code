@@ -7,6 +7,18 @@ import (
 	"strings"
 )
 
+//传入文件，解析markdown
+func ParseMarkdownByFile(filePath string) (list []model.MarkDown, err error) {
+	markdown, err := utils.ReadFile(filePath)
+	if err != nil {
+		return
+	}
+
+	list = ParseMarkdown(markdown)
+
+	return
+}
+
 //解析书写的需求文档, 获得需要的参数
 //默认文档完全符合规范
 func ParseMarkdown(str string) (list []model.MarkDown) {
@@ -17,6 +29,7 @@ func ParseMarkdown(str string) (list []model.MarkDown) {
 		attrs := SplitBlockAttr(block)
 		var md model.MarkDown
 		for _, attr := range attrs {
+
 			if strings.Contains(attr, "Note") {
 				md.Note = GetAttrBody(attr, "Note") //获得注释
 			}
@@ -93,10 +106,9 @@ func GetAttrReqTable(source string) (list []model.MarkDownReqTable) {
 
 func GetAttrReplyTable(source string) (list []model.MarkDownReplyTable) {
 
-	var isList bool
-	if strings.Contains(source, "*list*") {
-		isList = true
-	}
+	//if strings.Contains(source, "__list__") {
+	//	isList = true
+	//}
 
 	begin := strings.Index(source, "|")
 	end := strings.LastIndex(source, "|")
@@ -117,10 +129,9 @@ func GetAttrReplyTable(source string) (list []model.MarkDownReplyTable) {
 		}
 
 		list = append(list, model.MarkDownReplyTable{
-			Name:   strings.Title(utils.UnderlineToCamel(strings.TrimSpace(value[1]))),
-			Type:   strings.TrimSpace(value[2]),
-			Note:   strings.TrimSpace(value[3]),
-			IsList: isList,
+			Name: strings.Title(utils.UnderlineToCamel(strings.TrimSpace(value[1]))),
+			Type: strings.TrimSpace(value[2]),
+			Note: strings.TrimSpace(value[3]),
 		})
 
 	}

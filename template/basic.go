@@ -6,6 +6,14 @@ const (
 import (
 	%s
 )`
+	TemplateHeader = `
+package %s
+
+import (
+	%s
+)
+
+`
 
 	TemplateRouter            = "%s func(*gin.Context) `path:\"%s\"` //%s" //service router
 	TemplateMethodDeclaration = "%s: %s,"                                  //service 冒号方法
