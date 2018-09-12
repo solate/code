@@ -45,6 +45,9 @@ func ParseMarkdown(str string) (list []model.MarkDown) {
 			if strings.Contains(attr, "Response") {
 				md.Response = GetAttrReplyTable(attr) //获得Reply
 			}
+			if strings.Contains(attr, "__list__") {
+				md.ResponseType = true
+			}
 		}
 
 		list = append(list, md)
@@ -105,10 +108,6 @@ func GetAttrReqTable(source string) (list []model.MarkDownReqTable) {
 }
 
 func GetAttrReplyTable(source string) (list []model.MarkDownReplyTable) {
-
-	//if strings.Contains(source, "__list__") {
-	//	isList = true
-	//}
 
 	begin := strings.Index(source, "|")
 	end := strings.LastIndex(source, "|")

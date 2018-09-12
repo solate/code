@@ -70,12 +70,7 @@ func GenerateService() (err error) {
 	}
 
 	//service 所有方法一个文件
-	err = GenerateCode(
-		config.Config.ServiceTemplate,
-		config.Config.ServiceExport,
-		config.Config.ServiceFileName,
-		config.Config.ServiceTemplateParams...,
-	)
+	err = GenerateCode(config.Config.ServiceTemplate, config.Config.ServiceExport, config.Config.ServiceFileName, config.Config.ServiceTemplateParams...)
 
 	return
 }
@@ -91,13 +86,7 @@ func GenerateModule() (err error) {
 
 	//module 每个方法一个文件
 	for k, v := range config.Config.ModuleTemplateParams {
-		err = GenerateCode(
-			config.Config.ModuleTemplate,
-			config.Config.ModuleExport,
-			k,
-			v...,
-		)
-
+		err = GenerateCode(config.Config.ModuleTemplate, config.Config.ModuleExport, k, v...)
 	}
 
 	return

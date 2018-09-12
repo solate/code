@@ -1,12 +1,12 @@
 package model
 
 type MarkDown struct {
-	Note     string               //方法注释
-	URL      string               //方法请求路由地址
-	Method   string               //方法类型 GET/POST
-	Request  []MarkDownReqTable   //请求参数
-	Response []MarkDownReplyTable //返回值参数
-	IsList   bool                 //返回值Response是否是List: 是/否, true/false 字符串
+	Note         string               //方法注释
+	URL          string               //方法请求路由地址
+	Method       string               //方法类型 GET/POST
+	Request      []MarkDownReqTable   //请求参数
+	Response     []MarkDownReplyTable //返回值参数
+	ResponseType bool                 //返回值Response data 是 list/single, 单层还是多层结构
 }
 
 //表格字段
