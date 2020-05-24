@@ -1,0 +1,43 @@
+# gin 模式 debug, release, test
+mode = "debug"
+# api port
+port = "10010"
+
+[log]
+# 日志级别 "debug", "info", "warn", "error", "dpanic", "panic", and "fatal"
+level = "debug"
+# 日志地址  "./out.log"
+path = "./out.log"
+
+
+[etcd]
+# etcd的集群列表, 配置多个, 避免单点故障
+endpoints = ["127.0.0.1:2379"]
+#etcd的连接超时, 单位毫秒
+timeout = 5000
+# etcd_user_name
+username = ""
+# etcd_user_passwd
+password = ""
+
+# 数据库地址
+[DB]
+# 数据库类型, Default: mysql. Support soon: postgres,sqllite
+dialect = "mysql"
+# 数据库地址, localhost:3306
+host = "127.0.0.1"
+# 端口
+port = "3306"
+# 数据库名 dse
+name = "test"
+# 连接池中最大空闲连接数
+max_idle_conns = 20
+# 打开的最大连接数
+max_open_conns = 100
+# 连接的最大空闲时间, 单位秒
+conn_max_lifetime = 300
+# 数据库用户名
+username = "root"
+# 数据库密码
+password = "root"
+
