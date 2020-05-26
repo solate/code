@@ -4,7 +4,7 @@ type Config struct {
 	Mode string `toml:"mode"` // gin 模式
 	Port string `toml:"port"` // api port
 	Log  log    `toml:"log"`  // log
-
+	DB   db     `toml:"db"`   //数据库
 }
 
 //日志部分
