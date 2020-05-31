@@ -1,4 +1,4 @@
-package mainTemplate
+package mainFile
 
 const (
 	templateName         = "main"                   //模板名称

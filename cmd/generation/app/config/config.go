@@ -5,6 +5,8 @@ type Config struct {
 	Port string `toml:"port"` // api port
 	Log  log    `toml:"log"`  // log
 	DB   db     `toml:"db"`   //数据库
+
+	Export string `toml:"export"` // 导出路径
 }
 
 //日志部分

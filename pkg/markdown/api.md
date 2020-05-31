@@ -29,8 +29,8 @@
 
 | 名称   | 类型 | 说明 | 是否必填 |  默认值 |
 |-------|------|------| ------ | ------- |
-| doctorId   | string | 门诊号 | 是 |       |
-
+| doctorId   | string | 医生id | 是 |       |
+| doctorName   | string | 医生姓名 | 否 |       |
 
 * Response
 
@@ -55,8 +55,8 @@ __single__ //返回值类型是单层结构
 
 | 名称   | 类型 | 说明 | 是否必填 |  默认值 |
 |-------|------|------| ------ | ------- |
-| doctorName   | string | 门诊号 | 是 |       |
-
+| doctorName   | string | 医生姓名 | 是 |       |
+| doctorAge   | string | 医生年龄 | 否 |       |
 
 ### 患者详情
 
@@ -76,7 +76,8 @@ __single__ //返回值类型是单层结构
 
 | 名称   | 类型 | 说明 | 是否必填 |  默认值 |
 |-------|------|------| ------ | ------- |
-| patientId   | string | 门诊号 | 是 |       |
+| patientId   | string | 患者id | 是 |       |
+| patientName   | string | 患者姓名 | 否 |       |
 
 * Response
 
@@ -104,4 +105,4 @@ __list__ //返回值为list结构
 | 名称   | 类型 | 说明 | 是否必填 |  默认值 |
 |-------|------|------| ------ | ------- |
 | patientName   | string | 门诊号 | 是 |       |
-
+| patientAge   | string | 患者年龄 | 否 |       |

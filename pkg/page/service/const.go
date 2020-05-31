@@ -1,4 +1,4 @@
-package controller
+package service
 
 const (
 	templateName         = "service"                       //模板名称

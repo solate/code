@@ -1,19 +1,26 @@
 package micro
 
 import (
-	"github.com/solate/code/template/micro"
-	"github.com/solate/util/go/gostring"
+	"github.com/solate/code/pkg/component/logger"
 	"testing"
 )
 
-func TestNew(t *testing.T) {
-	s := &micro.Service{
-		Package:    "service",
-		ImportList: []string{"fmt", "os"},
-		StructName: gostring.Ucfirst("service"),
+func init() {
+	if err := logger.Init("debug", ""); err != nil {
+		return
 	}
+}
 
-	err := New("test", s).Start()
+func TestNewDefault(t *testing.T) {
+	err := NewDefault("micro").Start()
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+}
+
+func TestNew(t *testing.T) {
+	err := NewDefault("main").Start()
 	if err != nil {
 		t.Error(err.Error())
 		return

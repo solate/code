@@ -3,6 +3,9 @@ mode = "debug"
 # api port
 port = "10010"
 
+# 生成项目的路径
+export = "./export/"
+
 [log]
 # 日志级别 "debug", "info", "warn", "error", "dpanic", "panic", and "fatal"
 level = "debug"

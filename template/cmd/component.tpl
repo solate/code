@@ -3,7 +3,6 @@ package app
 import (
 	"github.com/solate/code/pkg/component/logger"
 	"github.com/solate/code/pkg/component/orm"
-	"github.com/solate/code/pkg/component/value"
 	"github.com/solate/util/project/configuration"
 	"github.com/solate/util/project/errorUtil"
 
@@ -39,8 +38,6 @@ func InitComponent() (err error) {
 		return errorUtil.ErrConfig
 	}
 	logger.Logger.Debug("init logger end")
-
-	value.Export = Config.Export
 
 	return
 }

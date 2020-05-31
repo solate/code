@@ -1,20 +1,23 @@
-package generation
+package markdown
 
 import (
-	"github.com/solate/generation/utils"
 	"strings"
 	"testing"
 )
 
 func TestParseMarkdown(t *testing.T) {
 
-	str, err := utils.ReadFile("./testdata/api.md")
+	md := New("./api.md")
+	list, err := md.ParseMarkdownByFile()
 	if err != nil {
-		t.Error(err)
-	}
+		t.Error(err.Error())
+		return
 
-	list := ParseMarkdown(str)
+	}
 	t.Log(list)
+
+	str := GetTemplateMethodDeclaration(list)
+	t.Log(str)
 
 }
 

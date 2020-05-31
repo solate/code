@@ -1,22 +1,26 @@
 package utils
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/solate/util/go/gostring"
+)
 
 func GetPackageName(file string) (str string) {
-	return GetTargetAfterPart(file, "package", " ", "\n")
+	return gostring.GetTargetAfterPart(file, "package", " ", "\n")
 }
 
 //获取文件import body 内容
 //file 读取文件的全部内容
 func GetImportBody(file string) (str string) {
-	return GetTargetAfterPart(file, "import", "(", ")")
+	return gostring.GetTargetAfterPart(file, "import", "(", ")")
 }
 
 //获得结构体内容字符串
 //file 读取文件全部内容
 //sub 要取得结构体名称
 func GetStructBody(file, sub string) (str string) {
-	return GetTargetAfterPart(file, sub, "{", "}")
+	return gostring.GetTargetAfterPart(file, sub, "{", "}")
 }
 
 //生成下划线格式文件名,
@@ -26,7 +30,7 @@ func GenerateUnderlineFileName(path, name string) string {
 	if !strings.HasSuffix(path, "/") {
 		path += "/"
 	}
-	return path + CamelToUnderline(name) + ".go"
+	return path + gostring.CamelToUnderline(name) + ".go"
 }
 
 //生成脱粉格式文件名
@@ -35,7 +39,7 @@ func GenerateCamelFileName(path, name string) string {
 	if !strings.HasSuffix(path, "/") {
 		path += "/"
 	}
-	return path + UnderlineToCamel(name) + ".go"
+	return path + gostring.UnderlineToCamel(name) + ".go"
 }
 
 // url类型, 生成方法名,

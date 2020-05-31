@@ -1,32 +1,48 @@
 package micro
 
 import (
-	"github.com/solate/code/pkg/component/value"
+	"github.com/solate/code/pkg/component/logger"
 	"github.com/solate/code/pkg/template"
-	"github.com/solate/code/template/micro"
+	"github.com/solate/util/go/gostring"
 	"path"
 )
 
 // 一个服务
 type Service struct {
-	name               string // 服务名称
-	*template.Template        //模板
-	//*micro.Service // 模板
+	*template.Option
 }
 
-func New(name string, s *micro.Service) *Service {
-	t := &template.Template{
-		Name:         templateName,
-		TemplatePath: path.Join(value.Root, templateRelativePath),
-		ExportPath:   path.Join(value.Export, exportDir, name, name+".go"),
-		Structure:    s,
+// 初始化
+func New(o *template.Option) *Service {
+	return &Service{o}
+}
+
+// 默认参数初始化
+func NewDefault(name string) *Service {
+	o := &template.Option{
+		Package: name,
+		ImportList: []string{
+			"github.com/solate/code/pkg/component/logger",
+			"github.com/solate/code/pkg/template",
+			"github.com/solate/util/go/gostring",
+		},
+		Struct: template.Struct{
+			Note:      "微服务",
+			Name:      gostring.Ucfirst(name),
+			FieldList: nil,
+			FuncList:  nil,
+		},
 	}
-	return &Service{Template: t}
+	return &Service{o}
 }
 
+// 启动服务
 func (s *Service) Start() (err error) {
-	if err = s.Template.CheckDir(); err != nil {
-		return
-	}
-	return s.Template.Write()
+	logger.Logger.Debug("In Start")
+	t := template.New(
+		templateRelativePath,
+		path.Join(exportDir, s.Option.Package, s.Option.Package+".go"),
+		s.Option,
+	)
+	return t.Start()
 }
