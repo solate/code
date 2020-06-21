@@ -1,4 +1,4 @@
-package app
+package cmd
 
 import (
 	"github.com/solate/code/pkg/component/logger"
@@ -11,8 +11,9 @@ func init() {
 	}
 }
 
-func TestNewComponent(t *testing.T) {
-	err := New("gen").Start()
+func TestNew(t *testing.T) {
+	root := "github.com/solate/code/export/" //生成文件git路径
+	err := New(root, "gen").Start()
 	if err != nil {
 		t.Error(err.Error())
 		return

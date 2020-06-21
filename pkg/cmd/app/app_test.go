@@ -11,7 +11,7 @@ func init() {
 	}
 }
 
-func TestNewComponent(t *testing.T) {
+func TestNew(t *testing.T) {
 	err := New("gen").Start()
 	if err != nil {
 		t.Error(err.Error())

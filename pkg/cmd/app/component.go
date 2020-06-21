@@ -1,29 +1,37 @@
 package app
 
 import (
+	"github.com/solate/code/pkg/component/logger"
 	"github.com/solate/code/pkg/template"
 	"path"
 )
 
 // 一个服务
 type Component struct {
-	cmdName            string // cmd启动项名称
-	*template.Template        //模板
-	//*micro.Service // 模板
+	pkg string //包名
+	*template.Option
 }
 
-func New(cmdName string, s interface{}) *Component {
+func NewComponent(packageName string) *Component {
 
-	t := template.New(
-		templateName,
-		templateRelativePath,
-		path.Join(exportDir, cmdName, "app/component.go"),
-		s,
-	)
+	o := &template.Option{
+		Package: "app", // 固定
+		ImportList: []string{
+			"github.com/solate/code/pkg/component/logger",
+			"github.com/solate/code/pkg/template",
+			"github.com/solate/util/go/gostring",
+		},
+	}
 
-	return &Component{Template: t}
+	return &Component{packageName, o}
 }
 
 func (s *Component) Start() (err error) {
-	return s.Template.Start()
+	logger.Logger.Debug("In Start")
+	t := template.New(
+		templateComponentPath,
+		path.Join(exportDir, s.pkg, "app/component.go"),
+		s.Option,
+	)
+	return t.Start()
 }

@@ -2,6 +2,7 @@ package markdown
 
 import (
 	"fmt"
+	"github.com/solate/code/pkg/cmd"
 	"strings"
 
 	"github.com/solate/code/pkg/markdown/models"
@@ -10,7 +11,9 @@ import (
 )
 
 type Markdown struct {
-	path string //文件路径
+	path  string // 文件路径
+	pkg   string // 包名
+	micro string // 微服务名
 }
 
 func New(path string) *Markdown {
@@ -20,7 +23,11 @@ func New(path string) *Markdown {
 // 启动markdown
 func (s *Markdown) Start() (err error) {
 
-	// TODO 解析完整的markdown
+	// 一个md 创建一个启动项
+	go cmd.New(s.path, s.micro).Start()
+
+	// 内容创建多个micro包
+
 	return
 
 }
@@ -46,7 +53,6 @@ func (s *Markdown) ParseMarkdown(str string) (list []models.MarkDown) {
 		attrs := SplitBlockAttr(block)
 		var md models.MarkDown
 		for _, attr := range attrs {
-
 			if strings.Contains(attr, "Note") {
 				md.Note = GetAttrBody(attr, "Note") //获得注释
 			}
